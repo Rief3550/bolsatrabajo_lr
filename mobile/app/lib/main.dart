@@ -3,9 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_job_marketplace/core/config/app_config.dart';
 import 'package:flutter_job_marketplace/core/di/service_locator.dart';
-import 'package:flutter_job_marketplace/core/services/navigation_service.dart';
 import 'package:flutter_job_marketplace/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:flutter_job_marketplace/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:flutter_job_marketplace/features/jobs/presentation/bloc/job_bloc.dart';
 import 'package:flutter_job_marketplace/features/notifications/presentation/bloc/notification_bloc.dart';
 import 'package:flutter_job_marketplace/features/profile/presentation/bloc/profile_bloc.dart';
@@ -16,13 +14,13 @@ import 'package:flutter_job_marketplace/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
+
   // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -32,13 +30,13 @@ void main() async {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
-  
+
   // Initialize app configuration
   await AppConfig.init(Environment.dev);
-  
+
   // Initialize service locator
   await initServiceLocator();
-  
+
   runApp(const MyApp());
 }
 
@@ -63,9 +61,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ServiceBloc>(
           create: (_) => sl<ServiceBloc>(),
-        ),
-        BlocProvider<ChatBloc>(
-          create: (_) => sl<ChatBloc>(),
         ),
         BlocProvider<SettingsBloc>(
           create: (_) => sl<SettingsBloc>()..add(GetSettingsEvent()),
