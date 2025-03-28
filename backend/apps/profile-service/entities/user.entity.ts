@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { UserProfession } from './userProfession.entity';
 import { UserServiceEntity } from './userService.entity';
 
 @Entity('users')
@@ -10,26 +9,9 @@ export class User {
   @Column({ unique: true })
   username!: string;
 
-  @Column({ name: 'password_hash' })
-  passwordHash!: string;
+  // ... otros campos ...
 
-  @Column({ name: 'first_name', nullable: true })
-  firstName?: string;
-
-  @Column({ name: 'last_name', nullable: true })
-  lastName?: string;
-
-  @Column({ nullable: true })
-  domicilio?: string;
-
-  @Column({ nullable: true })
-  edad?: number;
-
-  // etc.
-
-  @OneToMany(() => UserProfession, up => up.user)
-  userProfessions!: UserProfession[];
-
-  @Column({ name: 'profile_summary', type: 'text', nullable: true })
-  profileSummary?: string; // <-- Agregás esta para que TypeORM sepa que existe
+  // Aquí es donde declaramos la relación 1 -> N
+  @OneToMany(() => UserServiceEntity, us => us.user)
+  userServices!: UserServiceEntity[];
 }

@@ -44,34 +44,15 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.7
   shimmer: ^3.0.0
-  flutter_staggered_grid_view: ^0.7.0
-  flutter_local_notifications: ^15.1.0+1
   path_provider: ^2.1.1
-  # Reemplazamos file_picker por image_picker_web para evitar problemas de compatibilidad
-  image_picker_web: ^3.1.1
   permission_handler: ^10.4.3
-  # Añadimos paquetes para mejorar la arquitectura y rendimiento
+  # Paquetes para Clean Architecture
+  dartz: ^0.10.1
   equatable: ^2.0.5
   flutter_bloc: ^8.1.3
   get_it: ^7.6.0
   dio: ^5.3.2
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  flutter_secure_storage: ^8.0.0
-  connectivity_plus: ^4.0.2
-  flutter_native_splash: ^2.3.2
-  flutter_animate: ^4.2.0
-  lottie: ^2.6.0
-  logger: ^1.4.0
-  rxdart: ^0.27.7
-  flutter_dotenv: ^5.1.0
-  device_info_plus: ^9.0.3
-  package_info_plus: ^4.1.0
-  flutter_rating_bar: ^4.0.1
-  timeago: ^3.5.0
-  uuid: ^3.0.7
-  flutter_keyboard_visibility: ^5.4.1
-  flutter_spinkit: ^5.2.0
+  font_awesome_flutter: ^10.5.0
 
 dev_dependencies:
   flutter_test:
@@ -87,7 +68,6 @@ dev_dependencies:
   build_runner: ^2.4.6
   hive_generator: ^2.0.1
   mockito: ^5.4.2
-  flutter_native_splash: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -102,8 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/animations/
-    - assets/env/
+    - assets/fonts/
   fonts:
     - family: Poppins
       fonts:
@@ -116,25 +95,6 @@ flutter:
           weight: 500
         - asset: assets/fonts/Poppins-SemiBold.ttf
           weight: 600
-flutter_native_splash:
-  color: "#3366FF"
-  image: assets/images/splash_logo.png
-  android: true
-  ios: true
-  web: true
-
-flutter_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icons/app_icon.png"
-  min_sdk_android: 21
-  web:
-    generate: true
-    image_path: "assets/icons/app_icon.png"
-  windows:
-    generate: true
-    image_path: "assets/icons/app_icon.png"
-    icon_size: 48
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

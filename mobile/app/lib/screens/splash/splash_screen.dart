@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_job_marketplace/providers/auth_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_job_marketplace/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_job_marketplace/routes.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     final prefs = await SharedPreferences.getInstance();
     final isFirstTime = prefs.getBool('isFirstTime') ?? true;
     
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
     
     if (isFirstTime) {
       await prefs.setBool('isFirstTime', false);
@@ -56,15 +56,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
         Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
       }
     } else {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-      await authProvider.checkAuthStatus();
+      // Verificar el estado de autenticación usando el BLoC
+      context.read<AuthBloc>().add(CheckAuthStatusEvent());
+      
+      // Esperar un poco para que el BLoC procese el evento
+      await Future.delayed(const Duration(milliseconds: 500));
       
       if (mounted) {
-        if (authProvider.isAuthenticated) {
-          Navigator.pushReplacementNamed(context, AppRoutes.home);
-        } else {
-          Navigator.pushReplacementNamed(context, AppRoutes.login);
-        }
+        // Navegar a la pantalla de login directamente para simplificar
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
       }
     }
   }

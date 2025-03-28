@@ -1,0 +1,23 @@
+
+User0:[
+{ "username": "fedeok1"
+  "email": "fede.riera7@gmail.com",
+   "password": "password1234567"
+}
+]
+User1:[
+{ "username": "fedeo"
+  "email": "bolsadetrabajo.dev@gmail.com",
+   "password": "password123"
+}]
+
+user2: [
+{ "username": "User_dev1"
+  "email": "bolsatrabajolr@gmail.com",
+   "password": "password1234"
+}]
+
+
+
+ 
+    

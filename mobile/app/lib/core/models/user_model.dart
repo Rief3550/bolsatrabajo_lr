@@ -18,7 +18,8 @@ class UserModel extends Equatable {
   final bool isAvailable;
   final bool hasAgreedToConfidentiality;
   final String? profileImageUrl;
-  
+  final bool isEmailVerified;
+
   const UserModel({
     required this.id,
     required this.username,
@@ -37,30 +38,34 @@ class UserModel extends Equatable {
     required this.isAvailable,
     required this.hasAgreedToConfidentiality,
     this.profileImageUrl,
+    this.isEmailVerified = false,
   });
-  
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'],
-      username: json['username'],
-      name: json['name'],
-      lastName: json['lastName'],
-      email: json['email'],
-      address: json['address'],
-      age: json['age'],
-      profileType: json['profileType'],
-      isPhysicalPerson: json['isPhysicalPerson'],
-      isNonPhysicalPerson: json['isNonPhysicalPerson'],
-      requestedProfessions: List<String>.from(json['requestedProfessions']),
-      contractionType: json['contractionType'],
-      rating: json['rating'],
-      isBlocked: json['isBlocked'],
-      isAvailable: json['isAvailable'],
-      hasAgreedToConfidentiality: json['hasAgreedToConfidentiality'],
+      id: json['id'] ?? '',
+      username: json['username'] ?? '',
+      name: json['name'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      address: json['address'] ?? '',
+      age: json['age'] ?? 0,
+      profileType: json['profileType'] ?? '',
+      isPhysicalPerson: json['isPhysicalPerson'] ?? false,
+      isNonPhysicalPerson: json['isNonPhysicalPerson'] ?? false,
+      requestedProfessions: json['requestedProfessions'] != null 
+          ? List<String>.from(json['requestedProfessions']) 
+          : [],
+      contractionType: json['contractionType'] ?? '',
+      rating: (json['rating'] ?? 0.0).toDouble(),
+      isBlocked: json['isBlocked'] ?? false,
+      isAvailable: json['isAvailable'] ?? true,
+      hasAgreedToConfidentiality: json['hasAgreedToConfidentiality'] ?? false,
       profileImageUrl: json['profileImageUrl'],
+      isEmailVerified: json['isEmailVerified'] ?? false,
     );
   }
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -80,9 +85,10 @@ class UserModel extends Equatable {
       'isAvailable': isAvailable,
       'hasAgreedToConfidentiality': hasAgreedToConfidentiality,
       'profileImageUrl': profileImageUrl,
+      'isEmailVerified': isEmailVerified,
     };
   }
-  
+
   UserModel copyWith({
     String? id,
     String? username,
@@ -101,6 +107,7 @@ class UserModel extends Equatable {
     bool? isAvailable,
     bool? hasAgreedToConfidentiality,
     String? profileImageUrl,
+    bool? isEmailVerified,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -120,9 +127,10 @@ class UserModel extends Equatable {
       isAvailable: isAvailable ?? this.isAvailable,
       hasAgreedToConfidentiality: hasAgreedToConfidentiality ?? this.hasAgreedToConfidentiality,
       profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      isEmailVerified: isEmailVerified ?? this.isEmailVerified,
     );
   }
-  
+
   @override
   List<Object?> get props => [
     id,
@@ -142,6 +150,7 @@ class UserModel extends Equatable {
     isAvailable,
     hasAgreedToConfidentiality,
     profileImageUrl,
+    isEmailVerified,
   ];
 }
 

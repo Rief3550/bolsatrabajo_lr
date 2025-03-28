@@ -1,5 +1,7 @@
-import { Controller, Get, Post, Query, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Query, Body, HttpException, HttpStatus, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth-service.service';
+import { GoogleUser } from './decorators/google-user.decorator';
 
 @Controller('auth')
 export class AuthServiceController {
@@ -11,15 +13,16 @@ export class AuthServiceController {
     const { email, password, username } = body;
     return this.authService.register(email, password, username);
   }
-  @Post('register-provisional')
-async registerProvisional(@Body() body: { email: string; username: string }) {
-  return this.authService.registerProvisional(body.email, body.username);
-}
-@Get('verify')
-async verifyEmail(@Query('email') email: string, @Query('token') token: string) {
-  return this.authService.verifyEmail(email, token);
-}
 
+  @Post('register-provisional')
+  async registerProvisional(@Body() body: { email: string; username: string }) {
+    return this.authService.registerProvisional(body.email, body.username);
+  }
+
+  @Get('verify')
+  async verifyEmail(@Query('email') email: string, @Query('token') token: string) {
+    return this.authService.verifyEmail(email, token);
+  }
 
   @Post('login')
   async login(@Body() body: { email: string; password: string }): Promise<{ accessToken: string }> {
@@ -30,14 +33,14 @@ async verifyEmail(@Query('email') email: string, @Query('token') token: string) 
       throw new HttpException((error as any).message || 'Login failed', HttpStatus.UNAUTHORIZED);
     }
   }
-  @Post('complete-registration')
-async completeRegistration(@Body() body: { email: string; password: string; confirmPassword: string }) {
-  if (body.password !== body.confirmPassword) {
-    throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);
-  }
-  return this.authService.completeRegistration(body.email, body.password);
-}
 
+  @Post('complete-registration')
+  async completeRegistration(@Body() body: { email: string; password: string; confirmPassword: string }) {
+    if (body.password !== body.confirmPassword) {
+      throw new HttpException('Passwords do not match', HttpStatus.BAD_REQUEST);
+    }
+    return this.authService.completeRegistration(body.email, body.password);
+  }
 
   @Post('request-password-reset')
   async requestPasswordReset(@Body('email') email: string): Promise<string> {
@@ -59,6 +62,21 @@ async completeRegistration(@Body() body: { email: string; password: string; conf
     } catch (error) {
       throw new HttpException((error as any).message || 'Reset password failed', HttpStatus.BAD_REQUEST);
     }
+  }
+
+  // == GOOGLE ENDPOINTS ==
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  googleAuth() {
+    // Este endpoint solo redirige a Google para login
+    // no hace falta body
+  }
+
+  @Get('google/redirect')
+  @UseGuards(AuthGuard('google'))
+  googleAuthRedirect(@GoogleUser() user: any) {
+    // Con el decorador, “user” es lo que retorne GoogleStrategy en 'validate()'
+    return { message: 'Success', user };
   }
 
   @Get('test')

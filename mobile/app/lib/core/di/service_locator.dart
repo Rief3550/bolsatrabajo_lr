@@ -70,91 +70,91 @@ Future<void> initServiceLocator() async {
   sl.registerLazySingleton<DeviceInfoService>(() => DeviceInfoServiceImpl());
   
   // Repositories
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<JobRepository>(() => JobRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<NotificationRepository>(() => NotificationRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<ServiceRepository>(() => ServiceRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<SettingsRepository>(() => SettingsRepositoryImpl(sl()));
+  // sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<JobRepository>(() => JobRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<NotificationRepository>(() => NotificationRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<ServiceRepository>(() => ServiceRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<ChatRepository>(() => ChatRepositoryImpl(sl(), sl()));
+  // sl.registerLazySingleton<SettingsRepository>(() => SettingsRepositoryImpl(sl()));
   
   // Use cases
   // Auth
-  sl.registerLazySingleton(() => CheckAuthStatus(sl()));
-  sl.registerLazySingleton(() => Login(sl()));
-  sl.registerLazySingleton(() => Logout(sl()));
-  sl.registerLazySingleton(() => Register(sl()));
+  // sl.registerLazySingleton(() => CheckAuthStatus(sl()));
+  // sl.registerLazySingleton(() => Login(sl()));
+  // sl.registerLazySingleton(() => Logout(sl()));
+  // sl.registerLazySingleton(() => Register(sl()));
   
   // Jobs
-  sl.registerLazySingleton(() => GetJobs(sl()));
-  sl.registerLazySingleton(() => GetJobById(sl()));
-  sl.registerLazySingleton(() => CreateJob(sl()));
-  sl.registerLazySingleton(() => UpdateJob(sl()));
-  sl.registerLazySingleton(() => DeleteJob(sl()));
+  // sl.registerLazySingleton(() => GetJobs(sl()));
+  // sl.registerLazySingleton(() => GetJobById(sl()));
+  // sl.registerLazySingleton(() => CreateJob(sl()));
+  // sl.registerLazySingleton(() => UpdateJob(sl()));
+  // sl.registerLazySingleton(() => DeleteJob(sl()));
   
   // Notifications
-  sl.registerLazySingleton(() => GetNotifications(sl()));
-  sl.registerLazySingleton(() => MarkAsRead(sl()));
-  sl.registerLazySingleton(() => MarkAllAsRead(sl()));
+  // sl.registerLazySingleton(() => GetNotifications(sl()));
+  // sl.registerLazySingleton(() => MarkAsRead(sl()));
+  // sl.registerLazySingleton(() => MarkAllAsRead(sl()));
   
   // Profile
-  sl.registerLazySingleton(() => GetProfile(sl()));
-  sl.registerLazySingleton(() => UpdateProfile(sl()));
+  // sl.registerLazySingleton(() => GetProfile(sl()));
+  // sl.registerLazySingleton(() => UpdateProfile(sl()));
   
   // Services
-  sl.registerLazySingleton(() => GetServices(sl()));
-  sl.registerLazySingleton(() => GetServiceById(sl()));
+  // sl.registerLazySingleton(() => GetServices(sl()));
+  // sl.registerLazySingleton(() => GetServiceById(sl()));
   
   // Chat
-  sl.registerLazySingleton(() => GetChatList(sl()));
-  sl.registerLazySingleton(() => GetMessages(sl()));
-  sl.registerLazySingleton(() => SendMessage(sl()));
+  // sl.registerLazySingleton(() => GetChatList(sl()));
+  // sl.registerLazySingleton(() => GetMessages(sl()));
+  // sl.registerLazySingleton(() => SendMessage(sl()));
   
   // Settings
-  sl.registerLazySingleton(() => GetSettings(sl()));
-  sl.registerLazySingleton(() => UpdateSettings(sl()));
+  // sl.registerLazySingleton(() => GetSettings(sl()));
+  // sl.registerLazySingleton(() => UpdateSettings(sl()));
   
   // BLoCs
-  sl.registerFactory(() => AuthBloc(
-    checkAuthStatus: sl(),
-    login: sl(),
-    logout: sl(),
-    register: sl(),
-  ));
+  // sl.registerFactory(() => AuthBloc(
+  //   checkAuthStatus: sl(),
+  //   login: sl(),
+  //   logout: sl(),
+  //   register: sl(),
+  // ));
   
-  sl.registerFactory(() => JobBloc(
-    getJobs: sl(),
-    getJobById: sl(),
-    createJob: sl(),
-    updateJob: sl(),
-    deleteJob: sl(),
-  ));
+  // sl.registerFactory(() => JobBloc(
+  //   getJobs: sl(),
+  //   getJobById: sl(),
+  //   createJob: sl(),
+  //   updateJob: sl(),
+  //   deleteJob: sl(),
+  // ));
   
-  sl.registerFactory(() => NotificationBloc(
-    getNotifications: sl(),
-    markAsRead: sl(),
-    markAllAsRead: sl(),
-  ));
+  // sl.registerFactory(() => NotificationBloc(
+  //   getNotifications: sl(),
+  //   markAsRead: sl(),
+  //   markAllAsRead: sl(),
+  // ));
   
-  sl.registerFactory(() => ProfileBloc(
-    getProfile: sl(),
-    updateProfile: sl(),
-  ));
+  // sl.registerFactory(() => ProfileBloc(
+  //   getProfile: sl(),
+  //   updateProfile: sl(),
+  // ));
   
-  sl.registerFactory(() => ServiceBloc(
-    getServices: sl(),
-    getServiceById: sl(),
-  ));
+  // sl.registerFactory(() => ServiceBloc(
+  //   getServices: sl(),
+  //   getServiceById: sl(),
+  // ));
   
-  sl.registerFactory(() => ChatBloc(
-    getChatList: sl(),
-    getMessages: sl(),
-    sendMessage: sl(),
-  ));
+  // sl.registerFactory(() => ChatBloc(
+  //   getChatList: sl(),
+  //   getMessages: sl(),
+  //   sendMessage: sl(),
+  // ));
   
-  sl.registerFactory(() => SettingsBloc(
-    getSettings: sl(),
-    updateSettings: sl(),
-  ));
+  // sl.registerFactory(() => SettingsBloc(
+  //   getSettings: sl(),
+  //   updateSettings: sl(),
+  // ));
 }
 

@@ -24,6 +24,12 @@ class AuthUnauthenticated extends AuthState {}
 
 class AuthRegistered extends AuthState {}
 
+class EmailVerified extends AuthState {}
+
+class PasswordResetEmailSent extends AuthState {}
+
+class PasswordReset extends AuthState {}
+
 class AuthError extends AuthState {
   final String message;
 

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 enum Environment {
   dev,
@@ -13,32 +12,37 @@ class AppConfig {
   static late bool _enableLogging;
   static late bool _enableCrashlytics;
   static late bool _enableAnalytics;
-  
+
   static Environment get environment => _environment;
   static String get apiBaseUrl => _apiBaseUrl;
   static bool get enableLogging => _enableLogging;
   static bool get enableCrashlytics => _enableCrashlytics;
   static bool get enableAnalytics => _enableAnalytics;
-  
+
   static Future<void> init(Environment env) async {
     _environment = env;
     
-    await dotenv.load(fileName: _getEnvFileName());
-    
-    _apiBaseUrl = dotenv.env['API_BASE_URL'] ?? 'https://api.bolsatrabajoLR.com';
-    _enableLogging = dotenv.env['ENABLE_LOGGING'] == 'true';
-    _enableCrashlytics = dotenv.env['ENABLE_CRASHLYTICS'] == 'true';
-    _enableAnalytics = dotenv.env['ENABLE_ANALYTICS'] == 'true';
-  }
-  
-  static String _getEnvFileName() {
-    switch (_environment) {
+    // En una implementación real, cargaríamos desde un archivo .env
+    // Para simplificar, definimos valores por defecto según el entorno
+    switch (env) {
       case Environment.dev:
-        return 'assets/env/.env.dev';
+        _apiBaseUrl = 'https://dev-api.bolsatrabajoLR.com';
+        _enableLogging = true;
+        _enableCrashlytics = false;
+        _enableAnalytics = false;
+        break;
       case Environment.staging:
-        return 'assets/env/.env.staging';
+        _apiBaseUrl = 'https://staging-api.bolsatrabajoLR.com';
+        _enableLogging = true;
+        _enableCrashlytics = true;
+        _enableAnalytics = true;
+        break;
       case Environment.prod:
-        return 'assets/env/.env.prod';
+        _apiBaseUrl = 'https://api.bolsatrabajoLR.com';
+        _enableLogging = false;
+        _enableCrashlytics = true;
+        _enableAnalytics = true;
+        break;
     }
   }
 }

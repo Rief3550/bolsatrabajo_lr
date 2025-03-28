@@ -154,7 +154,7 @@ export class AuthService {
     if (!isMatch) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
-    const payload = { id: user.id, email: user.email };
+    const payload = { id: user.userId, email: user.email };
     const secret = process.env.JWT_SECRET || 'defaultSecret';
     const token = jwt.sign(payload, secret, { expiresIn: '1h' });
     return token;

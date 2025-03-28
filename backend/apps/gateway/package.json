@@ -1,0 +1,13 @@
+{
+    "name": "gateway",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "start": "nest start auth-service",
+      "start:dev": "cross-env NODE_ENV=development nest start auth-service",
+      "start:prod": "cross-env NODE_ENV=production nest start auth-service"
+    },
+    "dependencies": {
+    }
+  }
+  

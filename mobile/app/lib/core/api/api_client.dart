@@ -6,7 +6,7 @@ import 'package:flutter_job_marketplace/core/error/exceptions.dart';
 class ApiClient {
   final ApiInterceptor _interceptor;
   late final Dio _dio;
-  
+
   ApiClient(this._interceptor) {
     _dio = Dio(
       BaseOptions(
@@ -27,7 +27,7 @@ class ApiClient {
       error: true,
     ));
   }
-  
+
   Future<dynamic> get(
     String path, {
     Map<String, dynamic>? queryParameters,
@@ -49,7 +49,7 @@ class ApiClient {
       throw _handleError(e);
     }
   }
-  
+
   Future<dynamic> post(
     String path, {
     dynamic data,
@@ -75,7 +75,7 @@ class ApiClient {
       throw _handleError(e);
     }
   }
-  
+
   Future<dynamic> put(
     String path, {
     dynamic data,
@@ -101,7 +101,7 @@ class ApiClient {
       throw _handleError(e);
     }
   }
-  
+
   Future<dynamic> delete(
     String path, {
     dynamic data,
@@ -123,7 +123,7 @@ class ApiClient {
       throw _handleError(e);
     }
   }
-  
+
   Future<dynamic> patch(
     String path, {
     dynamic data,
@@ -149,7 +149,7 @@ class ApiClient {
       throw _handleError(e);
     }
   }
-  
+
   dynamic _handleResponse(Response response) {
     switch (response.statusCode) {
       case 200:
@@ -160,32 +160,32 @@ class ApiClient {
       case 400:
         throw BadRequestException(
           message: response.data['message'] ?? 'Bad request',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 400,
         );
       case 401:
         throw UnauthorizedException(
           message: response.data['message'] ?? 'Unauthorized',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 401,
         );
       case 403:
         throw ForbiddenException(
           message: response.data['message'] ?? 'Forbidden',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 403,
         );
       case 404:
         throw NotFoundException(
           message: response.data['message'] ?? 'Not found',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 404,
         );
       case 409:
         throw ConflictException(
           message: response.data['message'] ?? 'Conflict',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 409,
         );
       case 422:
         throw UnprocessableEntityException(
           message: response.data['message'] ?? 'Unprocessable entity',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 422,
           errors: response.data['errors'],
         );
       case 500:
@@ -194,16 +194,16 @@ class ApiClient {
       case 503:
         throw ServerException(
           message: response.data['message'] ?? 'Server error',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 500,
         );
       default:
         throw UnknownException(
           message: response.data['message'] ?? 'Unknown error',
-          statusCode: response.statusCode,
+          statusCode: response.statusCode ?? 0,
         );
     }
   }
-  
+
   Exception _handleError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:

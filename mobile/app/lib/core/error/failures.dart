@@ -3,12 +3,12 @@ import 'package:equatable/equatable.dart';
 abstract class Failure extends Equatable {
   final String message;
   final int statusCode;
-  
+
   const Failure({
     required this.message,
     required this.statusCode,
   });
-  
+
   @override
   List<Object> get props => [message, statusCode];
 }
@@ -44,7 +44,7 @@ class CacheFailure extends Failure {
 
 class ValidationFailure extends Failure {
   final Map<String, dynamic>? errors;
-  
+
   const ValidationFailure({
     required String message,
     required int statusCode,
@@ -53,7 +53,7 @@ class ValidationFailure extends Failure {
     message: message,
     statusCode: statusCode,
   );
-  
+
   @override
   List<Object> get props => [message, statusCode, if (errors != null) errors!];
 }
